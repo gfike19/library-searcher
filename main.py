@@ -8,8 +8,8 @@ urls = [
     "https://stcharles.overdrive.com/search"
 ]
 
-# Load queries from the file
-with open('to-read.txt', 'r') as f:
+# Load queries from the file using UTF-8 encoding to avoid decoding errors
+with open('to-read.txt', 'r', encoding='utf-8') as f:
     queries = f.readlines()
 
 # Function to perform a GET request and check for positive result
@@ -31,9 +31,9 @@ def search_overdrive(url, query):
         return False
 
 # File to store positive results
-output_file = '/mnt/data/positive_results.txt'
+output_file = 'positive_results.txt'
 
-with open(output_file, 'w') as output:
+with open(output_file, 'w', encoding='utf-8') as output:
     # Loop over each query and each URL
     for query in queries:
         for url in urls:
@@ -42,4 +42,3 @@ with open(output_file, 'w') as output:
                 output.write(f"Query: {query.strip()} | URL: {url}\n")
 
 print("Search completed. Positive results saved.")
-
